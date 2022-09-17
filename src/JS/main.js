@@ -205,8 +205,10 @@ function modelSelectorFunctionality() {
 function changePicture(selectImg, skinType, mainColor, id) {
   if (skinType === "false") {
     skinType = "default_skin";
+    mainColor = "black";
   }
   if (mainColor === "false" || (skinType !== "social_media_skin" && mainColor === "discord")) {
+    skinType = "default_skin";
     mainColor = "black";
   }
   if (skinType === "social_media_skin" && mainColor === "black") {
