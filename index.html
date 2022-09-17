@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://kit.fontawesome.com/554d91261a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./src/CSS/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./src/JS/main.js" defer></script>
+
+    <title>Background IMage generator</title>
+  </head>
+  <body>
+    <header>
+      <h1>Background Image generator</h1>
+      <p>Among us Style</p>
+    </header>
+
+    <main>
+      <section id="canvas">
+        <h2 class="heading-text">CREW MATE</h2>
+        <p class="info">there are <span class="highlight">Instructors</span> among us</p>
+        <div>
+          <img class="background" src="./src/assets/background/Background.png" alt="Background Image" />
+          <div id="model-wrapper">
+            <!-- <div class="model" data-num="1">
+                <div class="picture-wrapper">
+                  <img src="" alt="" />
+                  <img class="pet" src="" alt="" />
+                </div>
+                
+                <p class="name"></p>
+              </div> -->
+          </div>
+        </div>
+      </section>
+
+      <section class="model-select-wrapper">
+        <ul class="card-container">
+          <!-- <li>
+            <img src="./src/assets/models/Skins/default_skin/BLACK.png" alt="Default Among us Skin" />
+            <select name="select_skin" class="select skin">
+              <option value="default_skin">default</option>
+              <option value="dead_style_1">dead_style_1</option>
+              <option value="dead_style_2">dead_style_2</option>
+            </select>
+            <select name="select_color" class="select color">
+              <option value="black">black</option>
+              <option value="red">red</option>
+              <option value="green">green</option>
+              <option value="blue">blue</option>
+            </select>
+            <input type="text" placeholder="Name" />
+          </li> -->
+        </ul>
+      </section>
+
+      <section class="buttons">
+        <input class="amount-buddys" type="number" min="1" max="10" placeholder="Amount of Buddys (max:10)" />
+        <input type="text" name="header-text" id="header-text-input" placeholder="Header Text" />
+        <input type="text" name="Info-text" id="Info-text-input" placeholder="Info Text" />
+        <input type="text" name="highlighter" id="highlighter" placeholder="repeat words to highlighte" />
+        <button class="btn apply">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+            <path
+              d="M374.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7 86.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z"
+            />
+          </svg>
+        </button>
+      </section>
+      <section class="generate-wrapper">
+        ---NOT IMPLEMENTED YET-----------
+        <button class="btn preview">Preview</button>
+        <button class="btn screenShot">Generate and download your Picture</button>
+      </section>
+    </main>
+  </body>
+</html>

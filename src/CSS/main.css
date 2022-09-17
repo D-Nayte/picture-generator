@@ -1,0 +1,111 @@
+main {
+  display: grid;
+  max-width: 100%;
+  margin-top: calc(var(--padding) * 4);
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-rows: auto; */
+  grid-template-areas:
+    "screen screen selector"
+    "buttons buttons selector"
+    "generate generate selector"
+    ".        .         selector";
+
+  column-gap: calc(var(--padding) / 4);
+  row-gap: calc(var(--padding) / 4);
+}
+
+#canvas {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  grid-area: screen;
+  aspect-ratio: 16/9;
+  align-self: start;
+}
+
+#canvas > div:first-of-type {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#canvas > div:first-of-type > img {
+  width: 100%;
+  box-shadow: 20px 10px 25px 20px rgba(0, 0, 0, 0.6);
+}
+
+#canvas h2,
+#canvas p {
+  position: absolute;
+  color: white;
+  z-index: 2;
+}
+#canvas h2 {
+  font-size: 6.472rem;
+  top: 2rem;
+  letter-spacing: 0.8rem;
+}
+
+#canvas > p {
+  top: 13.562rem;
+  font-size: 2rem;
+  letter-spacing: 0.4rem;
+}
+
+#model-wrapper {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 8%;
+  left: 0;
+}
+
+.model {
+  max-width: 15%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.model p {
+  position: relative;
+  bottom: 0rem;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+}
+
+.picture-wrapper {
+  position: relative;
+  max-width: 100%;
+  display: grid;
+  justify-content: flex-end;
+  align-items: flex-end;
+  grid-template-columns: repeat(4, 1fr);
+  flex-direction: row-reverse;
+  /* grid-template-areas: "pet pet pet dude dude"; */
+  z-index: 3;
+  margin-bottom: 1rem;
+}
+
+.picture-wrapper img:first-child {
+  position: relative;
+  max-width: 100%;
+  aspect-ratio: 1/1;
+  grid-column: 1/5;
+  grid-row: 1/2;
+  z-index: 3;
+  /* grid-area: dude; */
+}
+
+.picture-wrapper .pet {
+  position: relative;
+  left: 0;
+  width: 50%;
+  grid-column: 1/4;
+  grid-row: 1/2;
+  z-index: 4;
+}

@@ -1,0 +1,84 @@
+.buttons {
+  display: flex;
+  width: 100%;
+  min-height: 5rem;
+  max-height: 7%;
+  grid-area: buttons;
+  z-index: 5;
+  gap: calc(var(--padding) / 4);
+  position: relative;
+}
+
+.buttons input {
+  max-width: 100%;
+  font-size: 1.7rem;
+  box-shadow: 30px 30px 15px -15px rgba(0, 0, 0, 0.4);
+}
+
+#highlighter {
+  width: 100%;
+  padding-right: 2rem;
+}
+
+section.buttons .apply {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: rgba(0, 100, 0, 0.658);
+  background-color: rgba(172, 255, 47, 0.507);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(172, 255, 47, 0.5) 70%);
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  border: 2px solid rgb(61, 0, 61) !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none !important;
+  pointer-events: all;
+  transition: all 250ms;
+}
+
+section.buttons .apply:hover {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(133, 211, 17) 70%);
+}
+
+section.buttons .apply:hover svg {
+  width: 2.5rem;
+}
+
+section.buttons .apply svg {
+  transition: all 250ms;
+  position: relative;
+  right: -50%;
+  width: 2rem;
+}
+
+/* .buttons::after {
+  text-align: center;
+  font-size: 3rem;
+  content: "+";
+  height: 100%;
+  width: 5%;
+  color: rgb(0, 100, 0);
+  background-color: rgba(172, 255, 47, 0.507);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(172, 255, 47, 1) 70%);
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  border: 2px solid rgb(61, 0, 61);
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  pointer-events: all;
+} */
+
+/* input:focus,
+input:hover {
+  transition: all 250ms;
+  scale: 1.03;
+} */

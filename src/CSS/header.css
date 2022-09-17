@@ -1,0 +1,24 @@
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  text-align: center;
+  padding-top: var(--padding);
+  color: white;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  /* background: rgb(233, 255, 199);
+  background: linear-gradient(0deg, rgba(233, 255, 199, 0) 0%, rgba(138, 149, 232, 1) 58%, rgba(138, 149, 232, 1) 100%); */
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 57%, #606ab6b6 100%);
+}
+
+header p {
+  font-size: 4rem;
+  font-weight: 600;
+  font-family: "AmongUs", "Courier New", Courier, monospace;
+}
