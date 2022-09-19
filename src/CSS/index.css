@@ -117,6 +117,7 @@ h2 > .highlight {
       "buttons buttons buttons"
       "generate generate generate"
       "selector selector selector";
+    row-gap: 1rem;
   }
 }
 
