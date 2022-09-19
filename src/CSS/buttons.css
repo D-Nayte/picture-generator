@@ -29,11 +29,11 @@ section.buttons .apply {
   color: rgba(0, 100, 0, 0.658);
   background-color: rgba(172, 255, 47, 0.507);
   background: rgb(255, 255, 255);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(172, 255, 47, 0.5) 70%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #1fb99583 70%);
   position: absolute;
   z-index: 10;
   right: 0;
-  border: 2px solid rgb(61, 0, 61) !important;
+  border: 2px solid #757ec4 !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: none !important;
@@ -43,7 +43,7 @@ section.buttons .apply {
 
 section.buttons .apply:hover {
   background: rgb(255, 255, 255);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(133, 211, 17) 70%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #1fb994 70%);
 }
 
 section.buttons .apply:hover svg {

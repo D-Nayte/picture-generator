@@ -4,3 +4,7 @@
   justify-content: center;
   grid-area: generate;
 }
+
+btn {
+  background-color: white;
+}

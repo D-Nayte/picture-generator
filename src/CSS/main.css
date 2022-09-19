@@ -14,7 +14,7 @@ main {
   row-gap: calc(var(--padding) / 4);
 }
 
-#canvas {
+.canvas {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -22,33 +22,35 @@ main {
   grid-area: screen;
   aspect-ratio: 16/9;
   align-self: start;
+  background-color: transparent !important;
 }
 
-#canvas > div:first-of-type {
+.canvas > div:first-of-type {
   width: 100%;
   display: flex;
   justify-content: center;
   position: relative;
+  background-color: transparent !important;
 }
 
-#canvas > div:first-of-type > img {
+.canvas > div:first-of-type > img {
   width: 100%;
   box-shadow: 20px 10px 25px 20px rgba(0, 0, 0, 0.6);
 }
 
-#canvas h2,
-#canvas p {
+.canvas h2,
+.canvas p {
   position: absolute;
   color: white;
   z-index: 2;
 }
-#canvas h2 {
+.canvas h2 {
   font-size: 6.472rem;
   top: 2rem;
   letter-spacing: 0.8rem;
 }
 
-#canvas > p {
+.canvas > p {
   top: 13.562rem;
   font-size: 2rem;
   letter-spacing: 0.4rem;

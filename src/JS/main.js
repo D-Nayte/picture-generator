@@ -1,66 +1,66 @@
-//import "./node_modules/html2canvas/dist/html2canvas.js";
-import skins from "../assets/models/skin_overview.json" assert { type: "json" };
-import colors from "../assets/models/colors.json" assert { type: "json" };
+import "../../node_modules/html2canvas/dist/html2canvas.js";
+import skins from "./skins.json" assert { type: "json" };
 import pets from "../assets/models/only_pets/pets.json" assert { type: "json" };
 
-console.log(skins);
+/* USE create(): "param1: element"; "param2: class/id"; "Object parameter: { parent: HTMLElement, position: "afterend", "beforeend", "afterstart" etc..}"*/
+import { create, select } from "./helper.js";
 
-window.addEventListener("load", function () {
-  generateModelSelectors();
-  modelSelectorFunctionality();
+window.addEventListener("load", () => {
+  createModelSelection();
+  changePictureModel();
   buttonFunctionality();
 });
 
-function generateModelSelectors(amountOfSelectors = 1) {
-  const ul = document.querySelector(".card-container");
-  let fragment = document.createDocumentFragment();
-  let counter = 1;
-  let allPicturesToRemove = document.querySelectorAll("#model-wrapper .model");
-  console.log(allPicturesToRemove);
-  allPicturesToRemove.forEach((item) => item.remove());
+function createModelSelection(id = 1) {
+  let ul = select(".card-container");
+  deleteOlderListItems();
+  let modelWrapper = document.querySelector("#model-wrapper");
 
-  let allItemnsToRemove = document.querySelectorAll(".card-container li");
-  allItemnsToRemove.forEach((item) => item.remove());
+  //delete old model items from picture before creating new one
+  let modelElements = select("#model-wrapper .model", "all");
+  modelElements.forEach((model) => model.remove());
 
-  for (let amount = 0; amount < amountOfSelectors; amount++) {
-    //create selection Cards
-    fragment.appendChild(generateCard(counter));
-    //create Picture Model
-    generateModel(counter);
-    counter++;
+  //create new Modelselection Items based on Users entry
+  for (let index = 1; index <= id; index++) {
+    ul.appendChild(createListItemModel(index));
+    modelWrapper.appendChild(createPictureModel(index));
+    changePictureModel(index);
   }
-
-  ul.appendChild(fragment);
 }
 
-//Creates the selection Cards
-function generateCard(counter) {
-  let li = document.createElement("li");
-  li.dataset.num = counter;
+function deleteOlderListItems() {
+  let listItems = select(".card-container li", "all");
+  listItems.forEach((li) => li.remove());
+}
 
-  let img = document.createElement("img");
-  li.insertAdjacentElement("afterbegin", img);
-  img.src = "./src/assets/models/Skins/default_skin/BLACK.png";
-  img.alt = "Default Among us Skin";
+function createListItemModel(id = 1) {
+  //create List item with contetn
+  let fragment = document.createDocumentFragment();
+  let li = create("li", "");
+  li.dataset.id = id;
+  fragment.appendChild(li);
+  let img = create("img", "", { parent: li, position: "beforeend" });
+  img.src = "./src/assets/models/Skins/adventurer_frozen/black.png";
+  img.alt = "Default Among us Skin black";
+  let selectSkin = create("select", ".select skin", { parent: li, position: "beforeend" });
+  selectSkin.dataset.id = id;
+  let selectColor = create("select", ".select color", { parent: li, position: "beforeend" });
+  selectColor.dataset.id = id;
 
-  let selectSkin = document.createElement("select");
-  li.insertAdjacentElement("beforeend", selectSkin);
-  selectSkin.classList.add("select", "skin");
-  let firstOption = document.createElement("option");
-  firstOption.value = false;
-  firstOption.textContent = "Select skin";
-  selectSkin.appendChild(firstOption);
-  selectSkin.appendChild(generateOptionList("skin"));
-  // ----------- CODE WHOLE OPTION LIST
+  //create all options for the select skin
+  skins.forEach((skin) => {
+    let skinName = create("option", "", { parent: selectSkin, position: "beforeend" });
+    skinName.value = skin.id;
+    skinName.textContent = skin.name;
+  });
 
-  let selectColor = document.createElement("select");
-  li.insertAdjacentElement("beforeend", selectColor);
-  selectColor.classList.add("select", "color");
-  let firstOption2 = document.createElement("option");
-  firstOption2.value = false;
-  firstOption2.textContent = "Select color";
-  selectColor.appendChild(firstOption2);
+  //create initial color choise list
+  skins[0].colors.forEach((color) => {
+    let skinColor = create("option", "", { parent: selectColor, position: "beforeend" });
+    skinColor.value = skinColor.textContent = color;
+  });
 
+  // create pet choise list
   let selectPet = document.createElement("select");
   li.insertAdjacentElement("beforeend", selectPet);
   selectPet.classList.add("select", "pet");
@@ -68,178 +68,104 @@ function generateCard(counter) {
   firstOption3.value = false;
   firstOption3.textContent = "None pet";
   selectPet.appendChild(firstOption3);
-  selectPet.appendChild(generateOptionList("pet"));
+  selectPet.appendChild(createPetList());
 
-  let nameInput = document.createElement("input");
-  nameInput.type = "text";
-  nameInput.placeholder = "Name";
-  li.insertAdjacentElement("beforeend", nameInput);
+  //create event Listener for whole li element
+  createListEventListener(li);
 
-  return li;
+  return fragment;
 }
 
-// generates the skin option List from the skins JSON
-function generateOptionList(type, skinType, target) {
-  if (type !== undefined && skinType != "false") {
-    let fragment = document.createDocumentFragment();
-    switch (type) {
-      case "skin":
-        skins.forEach((skin) => {
-          let option = document.createElement("option");
-          let text = skin.skinName.name.charAt(0).toUpperCase() + skin.skinName.name.slice(1);
-          text = text.replaceAll("_", " ");
-          option.value = skin.skinName.name;
-          option.textContent = text;
-          fragment.appendChild(option);
-        });
-        break;
-      case "color":
-        //clear the Color option List
-        target.parentNode.querySelectorAll("select[class='select color'] option").forEach((elem) => elem.remove());
-        let skinFromJson = skins.find((skin) => skin.skinName.name === skinType);
-        let availableColor = skinFromJson.skinName.colores;
-        let special = skinFromJson.skinName.special;
-        if (availableColor == "true") {
-          colors.forEach((color) => {
-            let option = document.createElement("option");
-            option.value = option.textContent = color;
-            fragment.appendChild(option);
-          });
-        } else if (special.length >= 1) {
-          special.forEach((item) => {
-            let option = document.createElement("option");
-            let text = item.name.charAt(0).toUpperCase() + item.name.slice(1);
-            text = text.replaceAll("_", " ");
-            option.value = item.name;
-            option.textContent = text;
+function createListEventListener(listElement) {
+  listElement.addEventListener("change", (event) => {
+    let listID = listElement.dataset.id;
+    let choicedSkinId = listElement.querySelector(".skin").value;
+    let [skinFromJson] = skins.filter((skin) => skin.id === choicedSkinId);
+    let parentElem = listElement.querySelector(".color");
 
-            fragment.appendChild(option);
-          });
-        } else {
-          let option = document.createElement("option");
-          option.value = option.textContent = "No Colors available for this Skinset";
-          fragment.appendChild(option);
-        }
-        break;
-      case "pet":
-        pets.forEach((pet) => {
-          let option = document.createElement("option");
-          let text = pet.pet_name.charAt(0).toUpperCase() + pet.pet_name.slice(1);
-          text = text.replaceAll("_", " ");
-          option.value = pet.url;
-          option.textContent = text;
-          fragment.appendChild(option);
-        });
-        break;
-      default:
-        break;
+    //Event if Skin is changed
+    if (event.target.classList.contains("skin")) {
+      //create options
+      let colorsArray = skinFromJson.colors;
+      let ListItems = listElement.querySelectorAll(".color option");
+      //delete actuall List items
+      ListItems.forEach((item) => item.remove());
+      //setup new colors in the List
+      colorsArray.forEach((color) => {
+        let skinColor = create("option", "", { parent: parentElem, position: "beforeend" });
+        skinColor.value = skinColor.textContent = color;
+      });
     }
-    return fragment;
-  }
-}
 
-//Generates the Models for the Picture
-async function generateModel(counter) {
-  let parentNode = document.querySelector("#model-wrapper");
-  let div = document.createElement("div");
-  let imgSrc = "./src/assets/models/Skins/default_skin/BLACK.png";
+    //if pet is changed
+    let petUrl;
+    if (event.target.classList.contains("pet")) {
+      petUrl = event.target.value;
+    }
 
-  parentNode.insertAdjacentElement("beforeend", div);
-  div.classList.add("model");
-  div.dataset.num = counter;
+    //change model from selector
+    let skinPathUrl = skinFromJson.url;
+    let choosedColor = parentElem.value + ".png";
+    let finalUrl = skinPathUrl + choosedColor;
+    let img = listElement.querySelector("img");
+    img.src = finalUrl;
 
-  let picturewrapper = document.createElement("div");
-  picturewrapper.classList = "picture-wrapper";
-
-  let img = document.createElement("img");
-  img.setAttribute("src", imgSrc);
-
-  let pet = document.createElement("img");
-  pet.classList.add("pet");
-
-  let p = document.createElement("p");
-  p.classList.add("name");
-
-  picturewrapper.insertAdjacentElement("beforeend", img);
-  picturewrapper.insertAdjacentElement("beforeend", pet);
-  div.insertAdjacentElement("beforeend", picturewrapper);
-  div.insertAdjacentElement("beforeend", p);
-}
-
-function modelSelectorFunctionality() {
-  let allModelSelectorCards = document.querySelectorAll("ul li");
-
-  allModelSelectorCards.forEach((modelCard) => {
-    modelCard.addEventListener("click", (event) => {
-      //id identifier, connector between option and output picture
-      const id = modelCard.dataset.num;
-      let newSkinSelected = event.target.classList.contains("skin");
-      let skinType = modelCard.querySelector("select[class='select skin']").value;
-      let mainColor = modelCard.querySelector("select[class='select color']").value;
-      let imgElement = modelCard.querySelector("img");
-      let name = modelCard.querySelector("li input");
-      let pet = modelCard.querySelector("select[class='select pet']");
-
-      //if no value, element isn't selected, no changes
-      if (event.target.value != "false" && newSkinSelected) {
-        //append option-list to select color section
-        let node = generateOptionList("color", skinType, event.target);
-        modelCard.querySelector("select[class='select color']").appendChild(node);
-
-        // Change Name
-        name.addEventListener("keyup", () => {
-          return (() => {
-            let pictureName = document.querySelector(`.model[data-num='${id}'] p`);
-            pictureName.textContent = name.value;
-          })();
-        });
-      }
-      // select pet
-      changePet(pet, id);
-      //refresh Image Picture
-      changePicture(imgElement, skinType, mainColor, id);
-    });
+    //change model from icture
+    changePictureModel(listID, finalUrl, petUrl);
   });
 }
 
-function changePicture(selectImg, skinType, mainColor, id) {
-  if (skinType === "false") {
-    skinType = "default_skin";
-    mainColor = "black";
-  }
-  if (mainColor === "false" || (skinType !== "social_media_skin" && mainColor === "discord")) {
-    skinType = "default_skin";
-    mainColor = "black";
-  }
-  if (skinType === "social_media_skin" && mainColor === "black") {
-    mainColor = "Discord";
-  }
+function createPetList() {
+  let fragment = document.createDocumentFragment();
 
-  let imgPath = `./src/assets/models/Skins/${skinType}/${mainColor}.png`;
-  let pictureImg = document.querySelector(`.model[data-num='${id}'] img`);
-  pictureImg.setAttribute("src", imgPath);
-  selectImg.setAttribute("src", imgPath);
+  pets.forEach((pet) => {
+    let option = document.createElement("option");
+    let text = pet.pet_name.charAt(0).toUpperCase() + pet.pet_name.slice(1);
+    text = text.replaceAll("_", " ");
+    option.value = pet.url;
+    option.textContent = text;
+    fragment.appendChild(option);
+  });
+  return fragment;
 }
 
-function changePet(pet, id) {
-  let imgElememById = document.querySelector(`.model[data-num='${id}'] .pet`);
-  pet.addEventListener("click", (event) => {
-    let url = event.target.value;
-    if (url == "false") {
-      return (imgElememById.src = "");
-    }
-    imgElememById.src = url;
-  });
+function createPictureModel(id) {
+  //generate new
+  let parentElem = document.createDocumentFragment();
+  let modelDiv = create("div", ".model", { parent: parentElem, position: "beforeend" });
+  modelDiv.dataset.num = id;
+  let pictureWrapper = create("div", ".picture-wrapper", { parent: modelDiv, position: "beforeend" });
+  let buddyModel = create("img", ".buddy", { parent: pictureWrapper, position: "beforeend" });
+  buddyModel.src = "./src/assets/models/Skins/adventurer_frozen/black.png";
+
+  let petModel = create("img", ".pet", { parent: pictureWrapper, position: "beforeend" });
+  let nameInput = create("p", ".name", { parent: modelDiv, position: "beforeend" });
+
+  return parentElem;
+}
+
+function changePictureModel(id = 1, finalUrl, petUrl) {
+  if (!finalUrl) {
+    finalUrl = "./src/assets/models/Skins/adventurer_frozen/black.png";
+  }
+  if (petUrl) {
+    let petElem = select(`[data-num="${id}"] .pet`);
+    petElem.src = petUrl;
+  }
+  let buddyImg = document.querySelector(`[data-num="${id}"] .buddy`);
+  buddyImg.src = finalUrl;
 }
 
 function buttonFunctionality() {
+  //generate the preview and take screenshot Buttons
+  generateButtons();
+
   //Amount of Buddys button behavior
   let amountBtn = document.querySelector(".amount-buddys");
   amountBtn.addEventListener("keyup", (event) => {
     let amount = parseInt(event.target.value);
     if (amount >= 1 && amount <= 10) {
-      generateModelSelectors(amount);
-      modelSelectorFunctionality();
+      createModelSelection(amount);
     }
   });
 
@@ -276,7 +202,6 @@ function buttonFunctionality() {
         console.log(word);
         headerelem.innerHTML = newString;
       }
-      console.log(wordFromArray);
       if (infoText.indexOf(wordFromArray) !== -1) {
         console.log(infoText.indexOf(wordFromArray));
         let start = infoText.indexOf(wordFromArray);
@@ -287,5 +212,51 @@ function buttonFunctionality() {
         infoTextElem.innerHTML = newString.toLowerCase();
       }
     }, 3500);
+  });
+}
+
+function generateButtons() {
+  //preview button
+  let previewButton = select(".generate-wrapper .preview");
+  let closeButton = select(".preview-container .btn");
+  let previewContainer = select(".preview-container");
+
+  closeButton.addEventListener("click", (event) => {
+    previewContainer.classList.toggle("hide");
+  });
+
+  previewButton.addEventListener("click", (event) => {
+    let canvas = select("main > .canvas");
+    let contentFromCanvas = canvas.innerHTML;
+    let preview = select(".preview-container .preview");
+    previewContainer.classList.toggle("hide");
+    preview.innerHTML = contentFromCanvas;
+    console.log(preview);
+  });
+
+  //generate "generate Button"
+  let generateButton = select(".screenShot");
+
+  generateButton.addEventListener("click", (event) => {
+    //remove round corners for download
+    let backgroundimage = document.querySelector(".background");
+    backgroundimage.style.borderRadius = 0;
+    let canvas = document.querySelector(".capture");
+    let options = { backgroundColor: null };
+    html2canvas(canvas, options).then((canvas) => {
+      let imageURL = canvas.toDataURL("image/png");
+
+      //download file
+      let anchor = document.createElement("a");
+      let tempAnchorElem = document.querySelector(".generate-wrapper");
+      anchor.href = imageURL;
+      anchor.download = "TEST0815";
+      anchor.classList.add("hide");
+      tempAnchorElem.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+    });
+    //readd the border radius for previews
+    backgroundimage.style.borderRadius = "1rem";
   });
 }
