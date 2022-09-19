@@ -102,6 +102,8 @@ function createListEventListener(listElement) {
       });
     }
 
+    //star wars skins to big, so make the img width smaler
+
     //if pet is changed
     let petUrl;
     if (event.target.classList.contains("pet")) {
@@ -115,8 +117,8 @@ function createListEventListener(listElement) {
     let img = listElement.querySelector("img");
     img.src = finalUrl;
 
-    //change model from icture
-    changePictureModel(listID, finalUrl, petUrl);
+    //change model from picture
+    changePictureModel(listID, finalUrl, petUrl, skinFromJson.name);
   });
 
   //event listener for name input
@@ -157,7 +159,7 @@ function createPictureModel(id) {
   return parentElem;
 }
 
-function changePictureModel(id = 1, finalUrl, petUrl) {
+function changePictureModel(id = 1, finalUrl, petUrl, skins) {
   if (!finalUrl) {
     finalUrl = "./src/assets/models/Skins/adventurer_frozen/black.png";
   }
@@ -167,6 +169,14 @@ function changePictureModel(id = 1, finalUrl, petUrl) {
   }
   let buddyImg = document.querySelector(`[data-num="${id}"] .buddy`);
   buddyImg.src = finalUrl;
+
+  console.log(skins);
+  //make star wars models smaller
+  if (skins === "Star Wars") {
+    buddyImg.style.padding = "4rem";
+  } else {
+    buddyImg.style.padding = "0rem";
+  }
 }
 
 function buttonFunctionality() {
@@ -244,7 +254,6 @@ function generateButtons() {
     let preview = select(".preview-container .preview");
     previewContainer.classList.toggle("hide");
     preview.innerHTML = contentFromCanvas;
-    console.log(preview);
   });
 
   //generate "generate Button"
@@ -254,9 +263,18 @@ function generateButtons() {
     //remove round corners for download
     let backgroundimage = document.querySelector(".background");
     backgroundimage.style.borderRadius = 0;
+
+    //get and print the canvas
     let canvas = document.querySelector(".capture");
-    let options = { backgroundColor: null, width: 1920, height: 1080 };
-    html2canvas(canvas, options).then((canvas) => {
+    let print = document.createElement("section");
+    print.classList.add("canvas", "capture");
+    print.innerHTML = canvas.innerHTML;
+    print.style.width = "1280px";
+    print.style.height = "720px";
+    canvas.appendChild(print);
+    let options = { backgroundColor: null, width: 1280, height: 720 };
+
+    html2canvas(print, options).then((canvas) => {
       let imageURL = canvas.toDataURL("image/png");
 
       //download file
@@ -271,5 +289,7 @@ function generateButtons() {
     });
     //readd the border radius for previews
     backgroundimage.style.borderRadius = "1rem";
+
+    print.remove();
   });
 }
