@@ -46,6 +46,9 @@ function createListItemModel(id = 1) {
   selectSkin.dataset.id = id;
   let selectColor = create("select", ".select color", { parent: li, position: "beforeend" });
   selectColor.dataset.id = id;
+  let name = create("input", "", { parent: li, position: "beforeend" });
+  name.type = "text";
+  name.placeholder = "Name";
 
   //create all options for the select skin
   skins.forEach((skin) => {
@@ -77,8 +80,10 @@ function createListItemModel(id = 1) {
 }
 
 function createListEventListener(listElement) {
+  //all event listeners for the selects
+  let listID = listElement.dataset.id;
+
   listElement.addEventListener("change", (event) => {
-    let listID = listElement.dataset.id;
     let choicedSkinId = listElement.querySelector(".skin").value;
     let [skinFromJson] = skins.filter((skin) => skin.id === choicedSkinId);
     let parentElem = listElement.querySelector(".color");
@@ -112,6 +117,14 @@ function createListEventListener(listElement) {
 
     //change model from icture
     changePictureModel(listID, finalUrl, petUrl);
+  });
+
+  //event listener for name input
+  let nameInput = listElement.querySelector("input");
+  nameInput.addEventListener("keyup", (event) => {
+    let nameFromInput = event.target.value;
+    let pictureModelName = select(`[data-num="${listID}"] p.name`);
+    pictureModelName.textContent = nameFromInput;
   });
 }
 

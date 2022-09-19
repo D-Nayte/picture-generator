@@ -68,16 +68,20 @@ main {
 .model {
   max-width: 15%;
   display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
 .model p {
-  position: relative;
+  position: absolute;
+  width: 100%;
   bottom: 0rem;
-  font-size: 2rem;
+  font-size: 1.7rem;
   letter-spacing: 0.1rem;
+  overflow: hidden;
+  text-align: center;
 }
 
 .picture-wrapper {
@@ -88,9 +92,8 @@ main {
   align-items: flex-end;
   grid-template-columns: repeat(4, 1fr);
   flex-direction: row-reverse;
-  /* grid-template-areas: "pet pet pet dude dude"; */
-  z-index: 3;
-  margin-bottom: 1rem;
+  z-index: 5;
+  bottom: 10%;
 }
 
 .picture-wrapper img:first-child {
