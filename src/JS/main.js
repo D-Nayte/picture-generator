@@ -84,6 +84,7 @@ function createListEventListener(listElement) {
   let listID = listElement.dataset.id;
 
   listElement.addEventListener("change", (event) => {
+    console.log("CHANGE!!!!!!!!!!!!!!!!!!!");
     let choicedSkinId = listElement.querySelector(".skin").value;
     let [skinFromJson] = skins.filter((skin) => skin.id === choicedSkinId);
     let parentElem = listElement.querySelector(".color");
@@ -101,8 +102,6 @@ function createListEventListener(listElement) {
         skinColor.value = skinColor.textContent = color;
       });
     }
-
-    //star wars skins to big, so make the img width smaler
 
     //if pet is changed
     let petUrl;
@@ -243,17 +242,19 @@ function generateButtons() {
   let previewButton = select(".generate-wrapper .previewBtn");
   let closeButton = select(".preview-container .btn");
   let previewContainer = select(".preview-container");
+  let canvas = select("main > .canvas");
+  let preview = select(".preview-container .preview");
 
   closeButton.addEventListener("click", (event) => {
     previewContainer.classList.toggle("hide");
+    preview.innerHTML = null;
   });
 
   previewButton.addEventListener("click", (event) => {
-    let canvas = select("main > .canvas");
     let contentFromCanvas = canvas.innerHTML;
     let preview = select(".preview-container .preview");
-    previewContainer.classList.toggle("hide");
     preview.innerHTML = contentFromCanvas;
+    previewContainer.classList.toggle("hide");
   });
 
   //generate "generate Button"
@@ -287,7 +288,7 @@ function generateButtons() {
       anchor.click();
       anchor.remove();
     });
-    //readd the border radius for previews
+    //re add the border radius for previews
     backgroundimage.style.borderRadius = "1rem";
 
     print.remove();
