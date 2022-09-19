@@ -104,8 +104,30 @@ h2 > .highlight {
   font-family: "Pixel", "Courier New", Courier, monospace;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1424px) {
   body {
-    --padding: 2rem;
+    --padding: 1rem;
+  }
+
+  main {
+    margin-top: calc(var(--padding) * 14);
+  }
+}
+
+@media (max-width: 1224px) {
+  main {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "heading heading heading"
+      "screen screen screen"
+      "buttons buttons buttons"
+      "generate generate generate"
+      "selector selector selector";
+  }
+}
+
+@media (max-width: 850px) {
+  :root {
+    font-size: 40%;
   }
 }

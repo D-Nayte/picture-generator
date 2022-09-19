@@ -26,7 +26,8 @@
 }
 
 .preview {
-  height: 100% !important;
-  width: auto !important;
+  pointer-events: none !important;
+  height: auto !important;
+  width: 100% !important;
   aspect-ratio: 16 / 9 !important;
 }

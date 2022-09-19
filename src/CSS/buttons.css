@@ -33,6 +33,7 @@ section.buttons .apply {
   position: absolute;
   z-index: 10;
   right: 0;
+  padding-right: 1.5rem;
   border: 2px solid #757ec4 !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

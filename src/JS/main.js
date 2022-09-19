@@ -170,10 +170,10 @@ function changePictureModel(id = 1, finalUrl, petUrl, skins) {
   let buddyImg = document.querySelector(`[data-num="${id}"] .buddy`);
   buddyImg.src = finalUrl;
 
-  console.log(skins);
   //make star wars models smaller
   if (skins === "Star Wars") {
     buddyImg.style.padding = "4rem";
+    buddyImg.style.paddingBottom = "3em";
   } else {
     buddyImg.style.padding = "0rem";
   }
@@ -240,7 +240,7 @@ function buttonFunctionality() {
 
 function generateButtons() {
   //preview button
-  let previewButton = select(".generate-wrapper .preview");
+  let previewButton = select(".generate-wrapper .previewBtn");
   let closeButton = select(".preview-container .btn");
   let previewContainer = select(".preview-container");
 
