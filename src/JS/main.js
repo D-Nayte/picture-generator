@@ -255,7 +255,7 @@ function generateButtons() {
     let backgroundimage = document.querySelector(".background");
     backgroundimage.style.borderRadius = 0;
     let canvas = document.querySelector(".capture");
-    let options = { backgroundColor: null };
+    let options = { backgroundColor: null, width: 1920, height: 1080 };
     html2canvas(canvas, options).then((canvas) => {
       let imageURL = canvas.toDataURL("image/png");
 

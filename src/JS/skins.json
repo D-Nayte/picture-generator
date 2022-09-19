@@ -49,24 +49,9 @@
   },
   {
     "id": "9",
-    "name": "Instructor Skins",
-    "colors": [
-      "Star wars 1",
-      "Star wars 2",
-      "Star wars 3",
-      "Star wars 4",
-      "Star wars 5",
-      "Star wars 6",
-      "Star wars 7",
-      "Star wars 8",
-      "Star wars 9",
-      "Star wars 10",
-      "Star wars 11",
-      "Star wars 12",
-      "Star wars 13",
-      "Star wars 14"
-    ],
-    "url": "./src/assets/models/Skins/Instructor_skins/"
+    "name": "Star Wars",
+    "colors": ["skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7", "skin8", "skin9", "skin10", "skin11", "skin12", "skin13", "skin14"],
+    "url": "./src/assets/models/Skins/Star_wars/"
   },
   {
     "id": "10",
