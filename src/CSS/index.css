@@ -35,12 +35,6 @@ html {
   border-radius: 1rem;
 }
 
-/* *:hover button,
-*:hover input {
-  transition: all 450ms;
-  transform: scale(1.03);
-} */
-
 h1 {
   font-size: 4.5rem;
 }
