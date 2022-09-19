@@ -1,4 +1,4 @@
-import "../../node_modules/html2canvas/dist/html2canvas.js";
+import "./html2canvas.js";
 import skins from "./skins.json" assert { type: "json" };
 import pets from "../assets/models/only_pets/pets.json" assert { type: "json" };
 
