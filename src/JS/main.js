@@ -84,7 +84,6 @@ function createListEventListener(listElement) {
   let listID = listElement.dataset.id;
 
   listElement.addEventListener("change", (event) => {
-    console.log("CHANGE!!!!!!!!!!!!!!!!!!!");
     let choicedSkinId = listElement.querySelector(".skin").value;
     let [skinFromJson] = skins.filter((skin) => skin.id === choicedSkinId);
     let parentElem = listElement.querySelector(".color");
@@ -216,21 +215,17 @@ function buttonFunctionality() {
 
     highlighterTextArrray.forEach((wordFromArray) => {
       if (headerText.indexOf(wordFromArray) !== -1) {
-        console.log(wordFromArray);
         let start = headerText.indexOf(wordFromArray);
         let end = start + wordFromArray.length;
         let word = headerText.slice(start, end);
         let newString = headerText.replace(word, `<span class="highlight">${word}</span>`);
-        console.log(word);
         headerelem.innerHTML = newString;
       }
       if (infoText.indexOf(wordFromArray) !== -1) {
-        console.log(infoText.indexOf(wordFromArray));
         let start = infoText.indexOf(wordFromArray);
         let end = start + wordFromArray.length;
         let word = infoText.slice(start, end);
         let newString = infoText.replace(word, `<span class="highlight">${word}</span>`);
-        console.log(word);
         infoTextElem.innerHTML = newString.toLowerCase();
       }
     }, 3500);
