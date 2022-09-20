@@ -45,7 +45,7 @@
     "id": "8",
     "name": "Doctor",
     "colors": ["black", "blue", "brown", "cyan", "green", "lime", "orange", "pink", "purple", "red", "tan", "white", "yellow"],
-    "url": "./src/assets/models/Skins/Doctor/"
+    "url": "./src/assets/models/Skins/doctor/"
   },
   {
     "id": "9",
