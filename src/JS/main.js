@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
   createModelSelection();
   changePictureModel();
   buttonFunctionality();
+  mirrorPicture();
 });
 
 function createModelSelection(id = 1) {
@@ -287,5 +288,14 @@ function generateButtons() {
     backgroundimage.style.borderRadius = "1rem";
 
     print.remove();
+  });
+}
+
+function mirrorPicture() {
+  let button = select(".mirror");
+  button.addEventListener("click", () => {
+    let canvas = select("section.canvas");
+    console.log("canvas", canvas);
+    canvas.classList.toggle("rotate");
   });
 }

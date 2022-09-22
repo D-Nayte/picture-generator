@@ -45,14 +45,14 @@ main {
   z-index: 2;
 }
 .canvas h2 {
-  font-size: 3rem;
-  top: 2rem;
+  font-size: 11rem;
+  top: 5rem;
   letter-spacing: 0.8rem;
 }
 
 .canvas > p {
-  top: 6.562rem;
-  font-size: 1.2rem;
+  top: 16.562rem;
+  font-size: 6rem;
   letter-spacing: 0.4rem;
 }
 

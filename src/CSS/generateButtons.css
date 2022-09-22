@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   grid-area: generate;
+  column-gap: 2%;
 }
 
 btn {

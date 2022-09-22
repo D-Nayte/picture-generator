@@ -121,8 +121,28 @@ h2 > .highlight {
   }
 }
 
-@media (max-width: 850px) {
+.rotate {
+  transform: rotateY(180deg);
+}
+
+.rotate > div:first-of-type > img {
+  box-shadow: -20px 10px 25px 20px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 950px) {
   :root {
-    font-size: 40%;
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 750px) {
+  :root {
+    font-size: 30%;
+  }
+}
+
+@media (max-width: 450px) {
+  :root {
+    font-size: 20%;
   }
 }
