@@ -1,6 +1,6 @@
 import "./html2canvas.js";
-import skins from "./skins.json" assert { type: "json" };
-import pets from "../assets/models/only_pets/pets.json" assert { type: "json" };
+import { skins } from "./skins.js";
+import { pets } from "../assets/models/only_pets/pets.js";
 
 /* USE create(): "param1: element"; "param2: class/id"; "Object parameter: { parent: HTMLElement, position: "afterend", "beforeend", "afterstart" etc..}"*/
 import { create, select } from "./helper.js";
